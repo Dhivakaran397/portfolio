@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Projects — Dhivakaran R</title>
+  <meta name="description" content="Projects by Dhivakaran R — Sports Store MERN, Inventory Management System, Library Management System.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== PROJECTS PAGE STYLES ===== */
+    .projects-grid-v2 {
+      display: grid;
+      gap: 28px;
+    }
+
+    /* Featured full-width card */
+    .proj-card {
+      background: rgba(255,255,255,0.88);
+      border: 1.5px solid rgba(100,140,220,0.15);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(100,140,220,0.10);
+      backdrop-filter: blur(18px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .proj-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 80px rgba(100,140,220,0.18);
+      border-color: rgba(0,180,216,0.35);
+    }
+
+    /* Horizontal layout for featured */
+    .proj-card.featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* Image side */
+    .proj-img-wrap {
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .proj-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+    .proj-card:hover .proj-img-wrap img { transform: scale(1.06); }
+
+    /* Gradient overlay on image */
+    .proj-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--proj-overlay, linear-gradient(135deg, rgba(0,180,216,0.5), rgba(124,92,255,0.4)));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .proj-card:hover .proj-img-wrap::after { opacity: 1; }
+
+    /* Image placeholder gradient */
+    .proj-img-placeholder {
+      width: 100%; height: 100%; min-height: 280px;
+      display: grid;
+      place-items: center;
+      background: var(--proj-gradient);
+      font-size: 4rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* Number badge on image */
+    .proj-num {
+      position: absolute;
+      top: 20px; left: 20px;
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.92);
+      display: grid;
+      place-items: center;
+      font-size: 0.88rem;
+      font-weight: 800;
+      z-index: 2;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      background: var(--proj-gradient);
+      color: #fff;
+    }
+
+    /* Content side */
+    .proj-content {
+      padding: 32px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .proj-type-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      width: fit-content;
+      background: var(--proj-tag-bg, rgba(0,180,216,0.10));
+      color: var(--proj-tag-color, #00b4d8);
+      border: 1px solid var(--proj-tag-border, rgba(0,180,216,0.2));
+    }
+
+    .proj-content h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0d1626;
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+    }
+    .proj-content p {
+      font-size: 0.87rem;
+      color: rgba(20,40,80,0.70);
+      line-height: 1.8;
+      margin: 0 0 20px;
+    }
+
+    /* Date badge */
+    .proj-date {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(30,50,90,0.50);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .proj-date i { color: #00b4d8; }
+
+    /* Tech badges */
+    .tech-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .tech-badge {
+      padding: 6px 13px;
+      border-radius: 999px;
+      background: rgba(100,140,220,0.08);
+      border: 1px solid rgba(100,140,220,0.18);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #1a2a4a;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .tech-badge:hover { transform: translateY(-2px); border-color: rgba(0,180,216,0.4); }
+
+    /* Action buttons */
+    .proj-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+      flex-wrap: wrap;
+    }
+    .proj-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .proj-btn:hover { transform: translateY(-2px); }
+    .proj-btn-primary {
+      background: linear-gradient(135deg, #00b4d8, #7c5cff);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(0,180,216,0.22);
+    }
+    .proj-btn-primary:hover { box-shadow: 0 14px 36px rgba(0,180,216,0.32); }
+    .proj-btn-ghost {
+      background: rgba(100,140,220,0.08);
+      border: 1.5px solid rgba(100,140,220,0.20);
+      color: #1a2a4a;
+    }
+
+    /* Grid of smaller cards (row of 2) */
+    .proj-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .proj-card.compact .proj-img-wrap { min-height: 200px; }
+    .proj-card.compact .proj-content { padding: 24px; }
+    .proj-card.compact h3 { font-size: 1.1rem; }
+
+    @media (max-width: 860px) {
+      .proj-card.featured { grid-template-columns: 1fr; }
+      .proj-row-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="navbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">D</span>
+        <span class="brand-text">Dhivakaran</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="skills.html" class="nav-link">Skills</a>
+        <a href="projects.html" class="nav-link active">Projects</a>
+        <a href="resume.html" class="nav-link">Resume</a>
+        <a href="links.html" class="nav-link">Links</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="section" style="padding-top:30px">
+
+
+    <div class="projects-grid-v2">
+
+      <!-- ===== PROJECT 1: Sports Store (Featured) ===== -->
+      <article class="proj-card featured"
+        style="--proj-overlay:linear-gradient(135deg,rgba(0,180,216,0.55),rgba(124,92,255,0.45))">
+        <div class="proj-img-wrap">
+          <div class="proj-num" style="background:linear-gradient(135deg,#00b4d8,#7c5cff)">01</div>
+          <img src="assets/projects/sportskart.jpg" alt="Sports Store MERN"
+            style="object-fit:contain; background:#fff; padding:12px;"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+          <div class="proj-img-placeholder" style="display:none;background:linear-gradient(135deg,#00b4d8,#7c5cff)">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+        </div>
+        <div class="proj-content">
+          <span class="proj-type-tag" style="--proj-tag-bg:rgba(0,180,216,0.10);--proj-tag-color:#00b4d8;--proj-tag-border:rgba(0,180,216,0.2)">
+            <i class="fa-solid fa-star"></i> Featured · MERN Stack
+          </span>
+          <div class="proj-date"><i class="fa-solid fa-calendar"></i> February 2025</div>
+          <h3>Sports Store — Full Stack E-Commerce</h3>
+          <p>A full-stack sports store application built with the MERN stack. Enables users to browse products, manage carts, complete secure online payments via Razorpay, and efficiently process orders through a user-friendly interface.</p>
+          <div class="tech-badges">
+            <span class="tech-badge">React</span>
+            <span class="tech-badge">Node.js</span>
+            <span class="tech-badge">Express.js</span>
+            <span class="tech-badge">MongoDB</span>
+            <span class="tech-badge">Razorpay</span>
+          </div>
+          <div class="proj-actions">
+            <a href="https://github.com/Dhivakaran397/" target="_blank" rel="noreferrer" class="proj-btn proj-btn-ghost">
+              <i class="fa-brands fa-github"></i> GitHub
+            </a>
+            <button onclick="window.open('https://sports-kart.vercel.app','_blank','noopener,noreferrer')" class="proj-btn proj-btn-primary">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== Bottom row: 2 compact cards ===== -->
+      <div class="proj-row-2">
+
+        <!-- PROJECT 2: Inventory Management System -->
+        <article class="proj-card compact"
+          style="--proj-overlay:linear-gradient(135deg,rgba(248,159,27,0.55),rgba(245,87,108,0.45))">
+          <div class="proj-img-wrap">
+            <div class="proj-num" style="background:linear-gradient(135deg,#f89f1b,#f5576c)">02</div>
+            <img src="assets/projects/inventory.jpg" alt="Inventory Management System"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+            <div class="proj-img-placeholder" style="display:none;background:linear-gradient(135deg,#f89f1b,#f5576c)">
+              <i class="fa-solid fa-boxes-stacked"></i>
+            </div>
+          </div>
+          <div class="proj-content">
+            <span class="proj-type-tag" style="--proj-tag-bg:rgba(248,159,27,0.10);--proj-tag-color:#f89f1b;--proj-tag-border:rgba(248,159,27,0.2)">
+              <i class="fa-brands fa-java"></i> Java · OOP
+            </span>
+            <div class="proj-date"><i class="fa-solid fa-calendar"></i> February 2026</div>
+            <h3>Inventory Management System</h3>
+            <p>A console-based system using Java and OOP to manage product records, stock updates, billing operations, purchase bill generation, and data validation for accurate inventory management.</p>
+            <div class="tech-badges">
+              <span class="tech-badge">Java</span>
+              <span class="tech-badge">OOP</span>
+              <span class="tech-badge">Data Structures</span>
+            </div>
+            <div class="proj-actions">
+              <a href="https://github.com/Dhivakaran397/" target="_blank" rel="noreferrer" class="proj-btn proj-btn-ghost">
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 3: Library Management System (Internship) -->
+        <article class="proj-card compact"
+          style="--proj-overlay:linear-gradient(135deg,rgba(0,196,122,0.55),rgba(0,180,216,0.45))">
+          <div class="proj-img-wrap">
+            <div class="proj-num" style="background:linear-gradient(135deg,#00c47a,#00b4d8)">03</div>
+            <img src="assets/projects/library.jpg" alt="Library Management System"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+            <div class="proj-img-placeholder" style="display:none;background:linear-gradient(135deg,#00c47a,#00b4d8)">
+              <i class="fa-solid fa-book-open"></i>
+            </div>
+          </div>
+          <div class="proj-content">
+            <span class="proj-type-tag" style="--proj-tag-bg:rgba(0,196,122,0.10);--proj-tag-color:#00c47a;--proj-tag-border:rgba(0,196,122,0.2)">
+              <i class="fa-solid fa-briefcase"></i> Internship · Full Stack
+            </span>
+            <div class="proj-date"><i class="fa-solid fa-calendar"></i> July 2025 · ARTTIFAI TECH</div>
+            <h3>Library Management System</h3>
+            <p>Full-stack library system to manage books, users, and borrowing records. Supports book issue and return operations while maintaining organized data and reducing manual work.</p>
+            <div class="tech-badges">
+              <span class="tech-badge">HTML</span>
+              <span class="tech-badge">CSS</span>
+              <span class="tech-badge">JavaScript</span>
+              <span class="tech-badge">Node.js</span>
+              <span class="tech-badge">MongoDB</span>
+            </div>
+            <div class="proj-actions">
+              <a href="https://github.com/Dhivakaran397/" target="_blank" rel="noreferrer" class="proj-btn proj-btn-ghost">
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /.proj-row-2 -->
+    </div><!-- /.projects-grid-v2 -->
+  </main>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navMenu   = document.getElementById('navMenu');
+    if (navToggle) navToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => scrollTopBtn.classList.toggle('show', window.scrollY > 300));
+    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+  <script src="fit.js"></script>
+</body>
+</html>

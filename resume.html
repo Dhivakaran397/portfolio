@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Resume — Dhivakaran R</title>
+  <meta name="description" content="Resume of Dhivakaran R — Full Stack Developer & CSE Student.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== RESUME PAGE STYLES ===== */
+    .resume-layout {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* --- Digital Resume Card --- */
+    .digital-resume {
+      background: rgba(255,255,255,0.92);
+      border: 1.5px solid rgba(100,140,220,0.15);
+      border-radius: 28px;
+      padding: 44px 42px;
+      box-shadow: 0 12px 60px rgba(100,140,220,0.13);
+      backdrop-filter: blur(18px);
+    }
+
+    /* Header */
+    .dr-header {
+      text-align: center;
+      padding-bottom: 28px;
+      border-bottom: 2px solid rgba(100,140,220,0.15);
+      margin-bottom: 28px;
+    }
+    .dr-name {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #0d1626;
+      margin: 0 0 6px;
+    }
+    .dr-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #00b4d8, #7c5cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0 0 18px;
+    }
+    .dr-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 20px;
+    }
+    .dr-contacts a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: rgba(30,50,90,0.72);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .dr-contacts a:hover { color: #00b4d8; }
+    .dr-contacts a i { color: #00b4d8; font-size: 0.78rem; }
+
+    /* Section */
+    .dr-section {
+      margin-bottom: 26px;
+    }
+    .dr-section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #00b4d8;
+      margin: 0 0 14px;
+    }
+    .dr-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1.5px;
+      background: linear-gradient(90deg, rgba(0,180,216,0.35), transparent);
+      border-radius: 999px;
+    }
+
+    /* Objective */
+    .dr-objective {
+      font-size: 0.88rem;
+      color: rgba(20,40,80,0.75);
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    /* Education rows */
+    .dr-edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(100,140,220,0.10);
+    }
+    .dr-edu-row:last-child { border-bottom: none; }
+    .dr-edu-left h4 {
+      margin: 0 0 3px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #0d1626;
+    }
+    .dr-edu-left p {
+      margin: 0;
+      font-size: 0.82rem;
+      color: rgba(30,50,90,0.62);
+    }
+    .dr-edu-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .dr-edu-right .yr {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #7c5cff;
+      display: block;
+    }
+    .dr-edu-right .gpa {
+      font-size: 0.82rem;
+      color: rgba(30,50,90,0.62);
+    }
+
+    /* Skills grid */
+    .dr-skills-grid {
+      display: grid;
+      gap: 8px;
+    }
+    .dr-skill-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 10px;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+    .dr-skill-row .sk-cat {
+      font-weight: 700;
+      color: #0d1626;
+    }
+    .dr-skill-row .sk-val {
+      color: rgba(30,50,90,0.72);
+    }
+
+    /* Cert / Internship / Project rows */
+    .dr-item {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(100,140,220,0.10);
+    }
+    .dr-item:last-child { border-bottom: none; }
+    .dr-item-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .dr-item-head h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #0d1626;
+    }
+    .dr-item-head .dr-date {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #00b4d8;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .dr-item-sub {
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: #7c5cff;
+      margin: 2px 0 6px;
+    }
+    .dr-item p, .dr-item li {
+      font-size: 0.84rem;
+      color: rgba(20,40,80,0.72);
+      line-height: 1.75;
+      margin: 0;
+    }
+    .dr-item ul {
+      margin: 4px 0 0 18px;
+      padding: 0;
+    }
+
+    /* Interests */
+    .dr-interests {
+      display: grid;
+      gap: 8px;
+    }
+    .dr-int-item {
+      font-size: 0.85rem;
+      color: rgba(20,40,80,0.72);
+      line-height: 1.7;
+    }
+    .dr-int-item strong {
+      color: #0d1626;
+    }
+
+    /* --- Sidebar --- */
+    .resume-sidebar {
+      display: grid;
+      gap: 20px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .sidebar-card {
+      background: rgba(255,255,255,0.88);
+      border: 1.5px solid rgba(100,140,220,0.15);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 8px 40px rgba(100,140,220,0.10);
+      backdrop-filter: blur(18px);
+    }
+
+    .sidebar-card h3 {
+      margin: 0 0 16px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0d1626;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar-card h3 i { color: var(--primary); }
+
+    /* Download button */
+    .dl-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .dl-btn:hover { transform: translateY(-2px); }
+    .dl-btn-primary {
+      background: linear-gradient(135deg, #00b4d8, #7c5cff);
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(0,180,216,0.25);
+      margin-bottom: 10px;
+    }
+    .dl-btn-primary:hover { box-shadow: 0 18px 40px rgba(0,180,216,0.35); }
+    .dl-btn-ghost {
+      background: rgba(100,140,220,0.08);
+      border: 1.5px solid rgba(100,140,220,0.20);
+      color: #1a2a4a;
+    }
+
+    /* Quick info chips */
+    .qinfo-grid {
+      display: grid;
+      gap: 10px;
+    }
+    .qinfo-chip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(100,140,220,0.07);
+      border: 1px solid rgba(100,140,220,0.13);
+      font-size: 0.84rem;
+    }
+    .qinfo-chip i {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #00b4d8, #7c5cff);
+      color: #fff;
+      font-size: 0.78rem;
+      flex-shrink: 0;
+    }
+    .qinfo-chip .qi-label {
+      font-size: 0.72rem;
+      color: rgba(30,50,90,0.55);
+      display: block;
+    }
+    .qinfo-chip .qi-val {
+      font-weight: 600;
+      color: #0d1626;
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .resume-layout {
+        grid-template-columns: 1fr;
+      }
+      .resume-sidebar { position: static; }
+      .digital-resume { padding: 28px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="site-header">
+    <nav class="navbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">D</span>
+        <span class="brand-text">Dhivakaran</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="skills.html" class="nav-link">Skills</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="resume.html" class="nav-link active">Resume</a>
+        <a href="links.html" class="nav-link">Links</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="section" style="padding-top:30px">
+
+    <!-- Heading -->
+
+
+    <div class="resume-layout">
+
+      <!-- ===== DIGITAL RESUME ===== -->
+      <div class="digital-resume">
+
+        <!-- Header -->
+        <div class="dr-header">
+          <h1 class="dr-name">DHIVAKARAN R</h1>
+          <p class="dr-title">Full Stack Developer</p>
+          <div class="dr-contacts">
+            <a href="mailto:dhivak397@gmail.com"><i class="fa-solid fa-envelope"></i> dhivak397@gmail.com</a>
+            <a href="tel:+916374182937"><i class="fa-solid fa-phone"></i> +91 6374182937</a>
+            <a href="https://www.linkedin.com/in/dhivakaran-r-6a7901321" target="_blank" rel="noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/Dhivakaran397" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+          </div>
+        </div>
+
+        <!-- Career Objective -->
+        <div class="dr-section">
+          <h2 class="dr-section-title"><i class="fa-solid fa-bullseye"></i> Career Objective</h2>
+          <p class="dr-objective">Aspiring Java and Full Stack Developer seeking an opportunity to apply my programming skills, build efficient web applications, and continuously enhance my technical knowledge while contributing to organizational success.</p>
+        </div>
+
+        <!-- Education -->
+        <div class="dr-section">
+          <h2 class="dr-section-title"><i class="fa-solid fa-graduation-cap"></i> Education</h2>
+          <div class="dr-edu-row">
+            <div class="dr-edu-left">
+              <h4>B.E. Computer Science and Engineering</h4>
+              <p>Sri Shakthi Institute of Engineering and Technology</p>
+            </div>
+            <div class="dr-edu-right">
+              <span class="yr">Pursuing</span>
+              <span class="gpa">CGPA: 7.96*</span>
+            </div>
+          </div>
+          <div class="dr-edu-row">
+            <div class="dr-edu-left">
+              <h4>Higher Secondary Certificate (HSC)</h4>
+              <p>Government Higher Secondary School, Kethanur</p>
+            </div>
+            <div class="dr-edu-right">
+              <span class="yr">2023</span>
+              <span class="gpa">80%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="dr-section">
+          <h2 class="dr-section-title"><i class="fa-solid fa-code"></i> Skills</h2>
+          <div class="dr-skills-grid">
+            <div class="dr-skill-row"><span class="sk-cat">Programming</span><span class="sk-val">Java, C</span></div>
+            <div class="dr-skill-row"><span class="sk-cat">Frontend</span><span class="sk-val">React, HTML, CSS, JavaScript</span></div>
+            <div class="dr-skill-row"><span class="sk-cat">Backend</span><span class="sk-val">Node.js</span></div>
+            <div class="dr-skill-row"><span class="sk-cat">Database</span><span class="sk-val">MySQL, MongoDB</span></div>
+            <div class="dr-skill-row"><span class="sk-cat">Core Concepts</span><span class="sk-val">OOP, Data Structures</span></div>
+            <div class="dr-skill-row"><span class="sk-cat">Soft Skills</span><span class="sk-val">Communication, Team Collaboration, Problem Solving, Quick Learner, Time Management</span></div>
+            <div class="dr-skill-row"><span class="sk-cat">Languages</span><span class="sk-val">English, Tamil (Read, Write, Speak)</span></div>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="dr-section">
+          <h2 class="dr-section-title"><i class="fa-solid fa-certificate"></i> Certifications</h2>
+          <div class="dr-item">
+            <div class="dr-item-head">
+              <h4>NPTEL — Programming in Java</h4>
+              <span class="dr-date">JAN – APR 2025</span>
+            </div>
+            <ul>
+              <li>Completed certification covering core Java concepts including OOP, exception handling, collections, multithreading, and weekly hands-on programming tasks.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Internship -->
+        <div class="dr-section">
+          <h2 class="dr-section-title"><i class="fa-solid fa-briefcase"></i> Internship</h2>
+          <div class="dr-item">
+            <div class="dr-item-head">
+              <h4>ARTTIFAI TECH</h4>
+              <span class="dr-date">JUL 14 – 21, 2025</span>
+            </div>
+            <p class="dr-item-sub">Library Management System — Full Stack Development</p>
+            <p>Developed a library management system that helps manage books, users, and borrowing records efficiently. The application supports book issue and return operations while maintaining organized data and reducing manual work.</p>
+          </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="dr-section">
+          <h2 class="dr-section-title"><i class="fa-solid fa-diagram-project"></i> Projects</h2>
+          <div class="dr-item">
+            <div class="dr-item-head">
+              <h4>Sports Store — MERN Stack</h4>
+              <span class="dr-date">FEB 2025</span>
+            </div>
+            <p class="dr-item-sub">React, Node.js, Express, Razorpay, MongoDB</p>
+            <ul>
+              <li>Developed a full-stack sports store application that enables users to browse products, manage carts, complete secure online payments, and efficiently process orders through a user-friendly interface.</li>
+            </ul>
+          </div>
+          <div class="dr-item">
+            <div class="dr-item-head">
+              <h4>Inventory Management System</h4>
+              <span class="dr-date">FEB 2026</span>
+            </div>
+            <p class="dr-item-sub">Java (Console Application)</p>
+            <ul>
+              <li>Developed a console-based inventory management system using Java and OOP to manage product records, stock updates, billing operations, purchase bill generation, and data validation, ensuring accurate calculations and efficient inventory management.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Area of Interest -->
+        <div class="dr-section" style="margin-bottom:0">
+          <h2 class="dr-section-title"><i class="fa-solid fa-lightbulb"></i> Area of Interest</h2>
+          <div class="dr-interests">
+            <p class="dr-int-item"><strong>Full Stack Development:</strong> Building web applications using frontend and backend technologies.</p>
+            <p class="dr-int-item"><strong>SQL:</strong> Writing efficient queries for data retrieval, database management, and CRUD operations.</p>
+            <p class="dr-int-item"><strong>Web Development:</strong> Creating responsive and user-friendly websites with modern technologies.</p>
+          </div>
+        </div>
+
+      </div><!-- /.digital-resume -->
+
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="resume-sidebar">
+
+        <!-- Download card -->
+        <div class="sidebar-card">
+          <h3><i class="fa-solid fa-download"></i> Download Resume</h3>
+          <a href="assets/resume/resume.pdf" download class="dl-btn dl-btn-primary">
+            <i class="fa-solid fa-file-pdf"></i> Download PDF
+          </a>
+          <a href="assets/resume/resume.pdf" target="_blank" rel="noreferrer" class="dl-btn dl-btn-ghost">
+            <i class="fa-solid fa-eye"></i> View in New Tab
+          </a>
+        </div>
+
+        <!-- Quick info -->
+        <div class="sidebar-card">
+          <h3><i class="fa-solid fa-id-card"></i> Quick Info</h3>
+          <div class="qinfo-grid">
+            <div class="qinfo-chip">
+              <i class="fa-solid fa-user"></i>
+              <div>
+                <span class="qi-label">Name</span>
+                <span class="qi-val">Dhivakaran R</span>
+              </div>
+            </div>
+            <div class="qinfo-chip">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <div>
+                <span class="qi-label">Degree</span>
+                <span class="qi-val">B.E. CSE (Pursuing)</span>
+              </div>
+            </div>
+            <div class="qinfo-chip">
+              <i class="fa-solid fa-star"></i>
+              <div>
+                <span class="qi-label">CGPA</span>
+                <span class="qi-val">7.96 / 10</span>
+              </div>
+            </div>
+            <div class="qinfo-chip">
+              <i class="fa-solid fa-map-marker-alt"></i>
+              <div>
+                <span class="qi-label">College</span>
+                <span class="qi-val">Sri Shakthi Institute</span>
+              </div>
+            </div>
+            <div class="qinfo-chip">
+              <i class="fa-solid fa-laptop-code"></i>
+              <div>
+                <span class="qi-label">Role</span>
+                <span class="qi-val">Full Stack Developer</span>
+              </div>
+            </div>
+            <div class="qinfo-chip">
+              <i class="fa-solid fa-envelope"></i>
+              <div>
+                <span class="qi-label">Email</span>
+                <span class="qi-val">dhivak397@gmail.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="sidebar-card" style="text-align:center">
+          <h3 style="justify-content:center"><i class="fa-solid fa-handshake"></i> Let's Work Together</h3>
+          <p style="font-size:0.85rem;color:rgba(30,50,90,0.65);margin:0 0 16px;line-height:1.7">Open to internships, collaborations, and exciting opportunities.</p>
+          <a href="contact.html" class="dl-btn dl-btn-primary" style="margin-bottom:0">
+            <i class="fa-solid fa-paper-plane"></i> Contact Me
+          </a>
+        </div>
+
+      </aside>
+    </div>
+  </main>
+
+  <!-- Scroll-to-top -->
+  <button class="scroll-top" id="scrollTop" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navMenu   = document.getElementById('navMenu');
+    if (navToggle) navToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
+
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => scrollTopBtn.classList.toggle('show', window.scrollY > 300));
+    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+  <script src="fit.js"></script>
+</body>
+</html>

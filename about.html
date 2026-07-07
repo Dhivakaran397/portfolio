@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>About — Dhivakaran R</title>
+  <meta name="description" content="About Dhivakaran R — Full Stack Developer and CSE student at Sri Shakthi Institute of Engineering.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* Profile visual card */
+    .about-visual-card {
+      background: rgba(255,255,255,0.88);
+      border: 1.5px solid rgba(100,140,220,0.15);
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: 0 8px 40px rgba(100,140,220,0.10);
+      text-align: center;
+      position: sticky;
+      top: 100px;
+    }
+    .av-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid transparent;
+      background: linear-gradient(#fff,#fff) padding-box,
+                  linear-gradient(135deg,#00b4d8,#7c5cff) border-box;
+      box-shadow: 0 0 40px rgba(0,180,216,0.2);
+      margin: 0 auto 16px;
+      display: block;
+    }
+    .av-photo-placeholder {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#00b4d8,#7c5cff);
+      display: grid;
+      place-items: center;
+      font-size: 3rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 auto 16px;
+    }
+    .av-name {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #0d1626;
+      margin: 0 0 4px;
+    }
+    .av-role {
+      font-size: 0.83rem;
+      color: #00b4d8;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 0 0 20px;
+    }
+    .av-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .av-tag {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(100,140,220,0.08);
+      border: 1px solid rgba(100,140,220,0.18);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #1a2a4a;
+    }
+    .av-divider {
+      height: 1px;
+      background: rgba(100,140,220,0.15);
+      margin: 18px 0;
+    }
+    .av-stat-row {
+      display: flex;
+      justify-content: space-around;
+    }
+    .av-stat { text-align: center; }
+    .av-stat .num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg,#00b4d8,#7c5cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+    }
+    .av-stat .lbl {
+      font-size: 0.74rem;
+      color: rgba(30,50,90,0.55);
+      margin-top: 2px;
+      display: block;
+    }
+    .av-socials {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .av-social-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(100,140,220,0.08);
+      border: 1px solid rgba(100,140,220,0.18);
+      color: #1a2a4a;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .av-social-btn:hover {
+      transform: translateY(-3px);
+      border-color: #00b4d8;
+      color: #00b4d8;
+    }
+
+    /* Right content */
+    .about-right {
+      display: grid;
+      gap: 22px;
+    }
+
+    /* Bio card */
+    .about-bio-card {
+      background: rgba(255,255,255,0.88);
+      border: 1.5px solid rgba(100,140,220,0.15);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 8px 40px rgba(100,140,220,0.10);
+    }
+    .abc-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #00b4d8;
+      margin: 0 0 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .abc-title::after {
+      content:''; flex:1; height:1.5px;
+      background: linear-gradient(90deg, rgba(0,180,216,0.3), transparent);
+    }
+    .about-bio-card p {
+      margin: 0;
+      color: rgba(20,40,80,0.72);
+      line-height: 1.85;
+      font-size: 0.9rem;
+    }
+
+    /* Timeline cards */
+    .about-timeline {
+      display: grid;
+      gap: 16px;
+    }
+    .tl-card {
+      background: rgba(255,255,255,0.88);
+      border: 1.5px solid rgba(100,140,220,0.15);
+      border-radius: 20px;
+      padding: 20px 22px;
+      box-shadow: 0 6px 28px rgba(100,140,220,0.08);
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 16px;
+      align-items: start;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .tl-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,180,216,0.35);
+    }
+    .tl-icon {
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.05rem;
+      flex-shrink: 0;
+    }
+    .tl-icon.blue  { background: rgba(0,180,216,0.12); color: #00b4d8; }
+    .tl-icon.purple{ background: rgba(124,92,255,0.12); color: #7c5cff; }
+    .tl-icon.green { background: rgba(0,196,122,0.12);  color: #00c47a; }
+    .tl-icon.orange{ background: rgba(248,159,27,0.12); color: #f89f1b; }
+
+    .tl-body h3 {
+      margin: 0 0 5px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0d1626;
+    }
+    .tl-body p {
+      margin: 0;
+      font-size: 0.84rem;
+      color: rgba(20,40,80,0.68);
+      line-height: 1.7;
+    }
+    .tl-body .tl-meta {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #00b4d8;
+      margin-bottom: 4px;
+    }
+
+    /* Interests grid */
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .int-chip {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(100,140,220,0.06);
+      border: 1px solid rgba(100,140,220,0.15);
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #1a2a4a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .int-chip:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0,180,216,0.4);
+    }
+    .int-chip i { font-size: 1.3rem; }
+
+    @media (max-width: 860px) {
+      .about-layout { grid-template-columns: 1fr; }
+      .about-visual-card { position: static; }
+      .interests-grid { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="navbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">D</span>
+        <span class="brand-text">Dhivakaran</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link active">About</a>
+        <a href="skills.html" class="nav-link">Skills</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="resume.html" class="nav-link">Resume</a>
+        <a href="links.html" class="nav-link">Links</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="section" style="padding-top:30px">
+
+
+    <div class="about-layout">
+
+      <!-- Left: Profile card -->
+      <div class="about-visual-card">
+        <img src="assets/profile.jpg" alt="Dhivakaran R" class="av-photo"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'">
+        <div class="av-photo-placeholder" style="display:none">D</div>
+
+        <h2 class="av-name">Dhivakaran R</h2>
+        <p class="av-role">Full Stack Developer</p>
+
+        <div class="av-tags">
+          <span class="av-tag">MERN Stack</span>
+          <span class="av-tag">Java</span>
+          <span class="av-tag">React</span>
+          <span class="av-tag">Node.js</span>
+        </div>
+
+        <div class="av-divider"></div>
+        <div class="av-stat-row">
+          <div class="av-stat">
+            <span class="num">7.96</span>
+            <span class="lbl">CGPA</span>
+          </div>
+          <div class="av-stat">
+            <span class="num">2+</span>
+            <span class="lbl">Projects</span>
+          </div>
+          <div class="av-stat">
+            <span class="num">1</span>
+            <span class="lbl">Internship</span>
+          </div>
+        </div>
+        <div class="av-divider"></div>
+
+        <div class="av-socials">
+          <a href="https://github.com/Dhivakaran397/" class="av-social-btn" target="_blank" rel="noreferrer" title="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/dhivakaran-r-6a7901321" class="av-social-btn" target="_blank" rel="noreferrer" title="LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="https://leetcode.com/u/dhivakaran05/" class="av-social-btn" target="_blank" rel="noreferrer" title="LeetCode">
+            <i class="fa-solid fa-code"></i>
+          </a>
+          <a href="mailto:dhivak397@gmail.com" class="av-social-btn" title="Email">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Content -->
+      <div class="about-right">
+
+        <!-- Bio -->
+        <div class="about-bio-card">
+          <p class="abc-title"><i class="fa-solid fa-quote-left"></i> Career Objective</p>
+          <p>Aspiring Java and Full Stack Developer seeking an opportunity to apply my programming skills, build efficient web applications, and continuously enhance my technical knowledge while contributing to organizational success. I enjoy turning ideas into reliable, user-friendly products with attention to performance and clean code.</p>
+        </div>
+
+        <!-- Education -->
+        <div class="abc-title" style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#00b4d8;display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <i class="fa-solid fa-graduation-cap"></i> Education
+          <span style="flex:1;height:1.5px;background:linear-gradient(90deg,rgba(0,180,216,0.3),transparent);display:block"></span>
+        </div>
+        <div class="about-timeline">
+          <div class="tl-card">
+            <div class="tl-icon blue"><i class="fa-solid fa-university"></i></div>
+            <div class="tl-body">
+              <p class="tl-meta">Currently Pursuing</p>
+              <h3>B.E. Computer Science & Engineering</h3>
+              <p>Sri Shakthi Institute of Engineering and Technology &nbsp;·&nbsp; CGPA: <strong>7.96*</strong></p>
+            </div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-icon purple"><i class="fa-solid fa-school"></i></div>
+            <div class="tl-body">
+              <p class="tl-meta">2023</p>
+              <h3>Higher Secondary Certificate (HSC)</h3>
+              <p>Government Higher Secondary School, Kethanur &nbsp;·&nbsp; <strong>80%</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Internship -->
+        <div class="abc-title" style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#7c5cff;display:flex;align-items:center;gap:8px;margin-bottom:4px;margin-top:4px">
+          <i class="fa-solid fa-briefcase"></i> Internship
+          <span style="flex:1;height:1.5px;background:linear-gradient(90deg,rgba(124,92,255,0.3),transparent);display:block"></span>
+        </div>
+        <div class="about-timeline">
+          <div class="tl-card">
+            <div class="tl-icon purple"><i class="fa-solid fa-building"></i></div>
+            <div class="tl-body">
+              <p class="tl-meta">JUL 14 – 21, 2025</p>
+              <h3>ARTTIFAI TECH — Full Stack Intern</h3>
+              <p>Library Management System — Developed a system to manage books, users, and borrowing records with book issue/return operations.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Area of Interest -->
+        <div class="abc-title" style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#00c47a;display:flex;align-items:center;gap:8px;margin-bottom:8px;margin-top:4px">
+          <i class="fa-solid fa-lightbulb"></i> Areas of Interest
+          <span style="flex:1;height:1.5px;background:linear-gradient(90deg,rgba(0,196,122,0.3),transparent);display:block"></span>
+        </div>
+        <div class="interests-grid">
+          <div class="int-chip"><i class="fa-solid fa-layer-group" style="color:#00b4d8"></i>Full Stack Dev</div>
+          <div class="int-chip"><i class="fa-solid fa-database" style="color:#7c5cff"></i>SQL & Databases</div>
+          <div class="int-chip"><i class="fa-solid fa-globe" style="color:#00c47a"></i>Web Development</div>
+          <div class="int-chip"><i class="fa-brands fa-java" style="color:#f89f1b"></i>Java / OOP</div>
+          <div class="int-chip"><i class="fa-solid fa-code" style="color:#f5576c"></i>Problem Solving</div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navMenu   = document.getElementById('navMenu');
+    if (navToggle) navToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => scrollTopBtn.classList.toggle('show', window.scrollY > 300));
+    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+  <script src="fit.js"></script>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Skills — Dhivakaran</title>
+  <meta name="description" content="Technical skills and tools used by Dhivakaran — a Computer Science Engineering student.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ===== SKILLS PAGE SPECIFIC STYLES ===== */
+
+    /* Stats banner */
+    .skills-stats {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+    }
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(100,140,220,0.18);
+      box-shadow: 0 4px 24px rgba(100,140,220,0.10);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #0d1626;
+      backdrop-filter: blur(10px);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .stat-pill:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(100,140,220,0.18);
+    }
+    .stat-pill i {
+      font-size: 1.1rem;
+    }
+    .stat-pill .pill-num {
+      font-size: 1.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Category grid */
+    .skill-grid-v2 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    /* Skill card v2 */
+    .skill-card-v2 {
+      background: rgba(255,255,255,0.88);
+      border: 1.5px solid rgba(100,140,220,0.15);
+      border-radius: 26px;
+      padding: 28px 26px 26px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 8px 40px rgba(100,140,220,0.10);
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-card-v2::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--card-accent, linear-gradient(90deg, var(--primary), var(--secondary)));
+      border-radius: 26px 26px 0 0;
+      opacity: 0.7;
+      transition: opacity 0.28s ease;
+    }
+    .skill-card-v2:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 70px rgba(100,140,220,0.18);
+      border-color: rgba(0,180,216,0.35);
+    }
+    .skill-card-v2:hover::before { opacity: 1; }
+
+    /* Card accent colors per category */
+    .skill-card-v2.cat-lang   { --card-accent: linear-gradient(90deg, #7c5cff, #a78bff); }
+    .skill-card-v2.cat-front  { --card-accent: linear-gradient(90deg, #00b4d8, #48e0ff); }
+    .skill-card-v2.cat-back   { --card-accent: linear-gradient(90deg, #00c47a, #48ffb5); }
+    .skill-card-v2.cat-db     { --card-accent: linear-gradient(90deg, #ff6b6b, #ffb347); }
+    .skill-card-v2.cat-tools  { --card-accent: linear-gradient(90deg, #f093fb, #f5576c); }
+
+    /* Card header */
+    .skv2-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .skv2-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      background: var(--card-accent, linear-gradient(135deg, rgba(0,180,216,0.15), rgba(124,92,255,0.15)));
+      color: transparent;
+      position: relative;
+    }
+    .skv2-icon i {
+      background: var(--card-accent, linear-gradient(135deg, var(--primary), var(--secondary)));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .skv2-head h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0d1626;
+    }
+    .skv2-head .skv2-count {
+      margin: 3px 0 0;
+      font-size: 0.78rem;
+      color: rgba(30,50,90,0.55);
+      font-weight: 500;
+    }
+
+    /* Skill rows */
+    .skv2-list {
+      display: grid;
+      gap: 16px;
+    }
+    .skv2-item {}
+    .skv2-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .skv2-label .name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1a2a4a;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .skv2-label .name i {
+      font-size: 0.85rem;
+      opacity: 0.75;
+    }
+    .skv2-label .pct {
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--card-accent, linear-gradient(135deg, var(--primary), var(--secondary)));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .skv2-track {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(100,140,220,0.12);
+      overflow: hidden;
+    }
+    .skv2-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: var(--card-accent, linear-gradient(90deg, var(--primary), var(--secondary)));
+      transition: width 1.3s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+    }
+    .skv2-fill::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.55);
+    }
+
+    /* Chip list for tools with no bars */
+    .skv2-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .skv2-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 15px;
+      border-radius: 999px;
+      background: rgba(100,140,220,0.08);
+      border: 1px solid rgba(100,140,220,0.18);
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: #1a2a4a;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .skv2-chip:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0,180,216,0.4);
+      box-shadow: 0 6px 20px rgba(0,180,216,0.12);
+    }
+    .skv2-chip i {
+      font-size: 0.88rem;
+      background: var(--card-accent, linear-gradient(135deg, var(--primary), var(--secondary)));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Extra wide card spanning 2 cols */
+    .skill-card-v2.span-2 {
+      grid-column: span 2;
+    }
+
+    @media (max-width: 900px) {
+      .skill-grid-v2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .skill-card-v2.span-2 {
+        grid-column: span 2;
+      }
+    }
+    @media (max-width: 600px) {
+      .skill-grid-v2 {
+        grid-template-columns: 1fr;
+      }
+      .skill-card-v2.span-2 {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="site-header">
+    <nav class="navbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">D</span>
+        <span class="brand-text">Dhivakaran</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="skills.html" class="nav-link active">Skills</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="resume.html" class="nav-link">Resume</a>
+        <a href="links.html" class="nav-link">Links</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="section" style="padding-top:30px">
+
+    <!-- Heading -->
+
+
+    <!-- Stats Pills -->
+    <div class="skills-stats">
+      <div class="stat-pill">
+        <i class="fa-solid fa-code" style="color:#7c5cff"></i>
+        <span class="pill-num">3</span>
+        <span>Languages</span>
+      </div>
+      <div class="stat-pill">
+        <i class="fa-solid fa-layer-group" style="color:#00b4d8"></i>
+        <span class="pill-num">2</span>
+        <span>Frameworks</span>
+      </div>
+      <div class="stat-pill">
+        <i class="fa-solid fa-database" style="color:#ff6b6b"></i>
+        <span class="pill-num">2</span>
+        <span>Databases</span>
+      </div>
+      <div class="stat-pill">
+        <i class="fa-solid fa-screwdriver-wrench" style="color:#f093fb"></i>
+        <span class="pill-num">4</span>
+        <span>Tools</span>
+      </div>
+    </div>
+
+    <!-- Skill Cards Grid -->
+    <div class="skill-grid-v2">
+
+      <!-- Programming Languages -->
+      <article class="skill-card-v2 cat-lang">
+        <div class="skv2-head">
+          <div class="skv2-icon">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <div>
+            <h3>Programming Languages</h3>
+            <p class="skv2-count">3 languages</p>
+          </div>
+        </div>
+        <div class="skv2-list">
+          <div class="skv2-item">
+            <div class="skv2-label">
+              <span class="name"><i class="fa-brands fa-java"></i> Java</span>
+              <span class="pct">90%</span>
+            </div>
+            <div class="skv2-track"><div class="skv2-fill" data-width="90"></div></div>
+          </div>
+          <div class="skv2-item">
+            <div class="skv2-label">
+              <span class="name"><i class="fa-brands fa-js"></i> JavaScript</span>
+              <span class="pct">85%</span>
+            </div>
+            <div class="skv2-track"><div class="skv2-fill" data-width="85"></div></div>
+          </div>
+          <div class="skv2-item">
+            <div class="skv2-label">
+              <span class="name"><i class="fa-solid fa-c"></i> C Language</span>
+              <span class="pct">78%</span>
+            </div>
+            <div class="skv2-track"><div class="skv2-fill" data-width="78"></div></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Frontend -->
+      <article class="skill-card-v2 cat-front">
+        <div class="skv2-head">
+          <div class="skv2-icon">
+            <i class="fa-solid fa-palette"></i>
+          </div>
+          <div>
+            <h3>Frontend Development</h3>
+            <p class="skv2-count">4 technologies</p>
+          </div>
+        </div>
+        <div class="skv2-list">
+          <div class="skv2-item">
+            <div class="skv2-label">
+              <span class="name"><i class="fa-brands fa-react"></i> React</span>
+              <span class="pct">82%</span>
+            </div>
+            <div class="skv2-track"><div class="skv2-fill" data-width="82"></div></div>
+          </div>
+          <div class="skv2-item">
+            <div class="skv2-label">
+              <span class="name"><i class="fa-brands fa-html5"></i> HTML5</span>
+              <span class="pct">96%</span>
+            </div>
+            <div class="skv2-track"><div class="skv2-fill" data-width="96"></div></div>
+          </div>
+          <div class="skv2-item">
+            <div class="skv2-label">
+              <span class="name"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+              <span class="pct">94%</span>
+            </div>
+            <div class="skv2-track"><div class="skv2-fill" data-width="94"></div></div>
+          </div>
+          <div class="skv2-item">
+            <div class="skv2-label">
+              <span class="name"><i class="fa-brands fa-js"></i> JavaScript</span>
+              <span class="pct">89%</span>
+            </div>
+            <div class="skv2-track"><div class="skv2-fill" data-width="89"></div></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Backend -->
+      <article class="skill-card-v2 cat-back">
+        <div class="skv2-head">
+          <div class="skv2-icon">
+            <i class="fa-solid fa-server"></i>
+          </div>
+          <div>
+            <h3>Backend Development</h3>
+            <p class="skv2-count">2 frameworks</p>
+          </div>
+        </div>
+        <div class="skv2-list">
+          <div class="skv2-item">
+            <div class="skv2-label">
+              <span class="name"><i class="fa-brands fa-node-js"></i> Node.js</span>
+              <span class="pct">84%</span>
+            </div>
+            <div class="skv2-track"><div class="skv2-fill" data-width="84"></div></div>
+          </div>
+          <div class="skv2-item">
+            <div class="skv2-label">
+              <span class="name"><i class="fa-solid fa-route"></i> Express.js</span>
+              <span class="pct">82%</span>
+            </div>
+            <div class="skv2-track"><div class="skv2-fill" data-width="82"></div></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Database -->
+      <article class="skill-card-v2 cat-db">
+        <div class="skv2-head">
+          <div class="skv2-icon">
+            <i class="fa-solid fa-database"></i>
+          </div>
+          <div>
+            <h3>Databases</h3>
+            <p class="skv2-count">2 databases</p>
+          </div>
+        </div>
+        <div class="skv2-list">
+          <div class="skv2-item">
+            <div class="skv2-label">
+              <span class="name"><i class="fa-solid fa-leaf"></i> MongoDB</span>
+              <span class="pct">86%</span>
+            </div>
+            <div class="skv2-track"><div class="skv2-fill" data-width="86"></div></div>
+          </div>
+          <div class="skv2-item">
+            <div class="skv2-label">
+              <span class="name"><i class="fa-solid fa-table"></i> MySQL</span>
+              <span class="pct">80%</span>
+            </div>
+            <div class="skv2-track"><div class="skv2-fill" data-width="80"></div></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tools — spans 2 cols -->
+      <article class="skill-card-v2 cat-tools span-2">
+        <div class="skv2-head">
+          <div class="skv2-icon">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+          </div>
+          <div>
+            <h3>Developer Tools &amp; Workflow</h3>
+            <p class="skv2-count">4 tools</p>
+          </div>
+        </div>
+        <div class="skv2-chips">
+          <span class="skv2-chip"><i class="fa-brands fa-git-alt"></i> Git</span>
+          <span class="skv2-chip"><i class="fa-brands fa-github"></i> GitHub</span>
+          <span class="skv2-chip"><i class="fa-solid fa-laptop-code"></i> VS Code</span>
+          <span class="skv2-chip"><i class="fa-solid fa-paper-plane"></i> Postman</span>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Scroll-to-top -->
+  <button class="scroll-top" id="scrollTop" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <script>
+    // Nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navMenu   = document.getElementById('navMenu');
+    if (navToggle) navToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
+
+    // Animate progress bars on load + IntersectionObserver
+    function animateBars() {
+      document.querySelectorAll('.skv2-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) animateBars(); });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.skill-card-v2').forEach(c => observer.observe(c));
+    // Also fire after short delay for above-fold content
+    setTimeout(animateBars, 400);
+
+    // Scroll-to-top
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('show', window.scrollY > 300);
+    });
+    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+  <script src="fit.js"></script>
+</body>
+</html>
